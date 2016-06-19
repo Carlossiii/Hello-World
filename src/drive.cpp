@@ -1,45 +1,97 @@
 #include <iostream>
+#include <istream>
 #include <string>
 
 using namespace std;
 
 class World{
-public:
+private:
 	std::string WorldName;
-	std::string color;
-	int population;
+	std::string WorldColor;
+	int WorldPopulation;
+public:
+	std::string getWorldName() const;
+	void setWorldName(std::string);
+	std::string getWorldColor() const;
+	void setWorldColor(string);
+	int getWorldPopulation() const;
+	void setWorldPopulation(int);
 };
 
-void getWorldProfile (World&);
-void showWorldProfile (const World&);
+string World::getWorldName() const{
+	return WorldName;
+}
+
+void World::setWorldName(std::string n){
+	if (n.length() == 0)
+		WorldName = "Nome não definido";
+	else
+		WorldName = n;
+}
+
+string World::getWorldColor() const{
+	return WorldColor;
+}
+
+void World::setWorldColor(std::string c){
+	if (c.length() == 0)
+		WorldName = "Cor não definida";
+	else
+		WorldColor = c;
+}
+
+int World::getWorldPopulation() const{
+	return WorldPopulation;
+}
+
+void World::setWorldPopulation(int p){
+	if (p < 0)
+		WorldPopulation = 0;
+	else
+		WorldPopulation = p;
+}
+
+void setWorldProfile (World&, int cc);
+void showWorldProfile (const World&, int cc);
 
 int main (int argc, char * argv[]){
-	World w1;
 	std::string input;
+	int m, c=1;
 	if (argc == 2){
 		input = (std::string)argv[1];
-		std::cout << input << std::endl;
+		std::cout << ">>> Hello " << input << "!"<< std::endl;
+		std::cout << "\n>>> Quantos mundos você quer criar?" << std::endl;
+		cin >> m;
+		while (c <= m){
+			World wc;
+			setWorldProfile (wc, c);
+			std::cout << "\n>>> Mostrando mundo criado:" << std::endl;
+			showWorldProfile (wc, c);
+			c++;
+		}
 	}
-	else{
-		getWorldProfile (w1);
-		std::cout << "Mostrando mundo criado:" << std::endl;
-		showWorldProfile (w1);
-		//std::cout << "Hello World" << std::endl;
-	}
+	else
+		cout << ">>> Erro. Tente: $ ./bin/teste [Seu_Nome]\n";
 	return 0;
 }
 
-void getWorldProfile (World& www){
-	std::cout << "Qual o nome do mundo?" << std::endl;
-	std::getline (std::cin, www.WorldName);
-	std::cout << "Qual a cor da atmosfera do mundo?" << std::endl;
-	std::getline (std::cin, www.color);
-	std::cout << "Qual a quantidade de habitantes do mundo informado?" << std::endl;
-	cin >> www.population;
+void setWorldProfile (World& www, int cc){
+	std::string val;
+	int vau;
+	std::cout << "\n>> Qual o nome do mundo " << cc << "?" << std::endl;
+	std::cin.ignore();
+	std::getline (std::cin, val);
+	www.setWorldName(val);
+	std::cout << ">> Qual a cor da atmosfera do mundo " << cc << "?" << std::endl;
+	std::getline (std::cin, val);
+	www.setWorldColor(val);
+	std::cout << ">> Qual a quantidade de habitantes do mundo informado?" << std::endl;
+	cin >> vau;
+	www.setWorldPopulation(vau);
 }
 
-void showWorldProfile (const World& www){
-	std::cout << "O nome do mundo é: " << www.WorldName << std::endl;
-	std::cout << "A cor da atmosfera do mundo é: " << www.color << std::endl;
-	std::cout << "A quatidade de habitantes é: " << www.population << std::endl;
+void showWorldProfile (const World& www, int cc){
+	std::cout << ">> O nome do mundo " << cc << " é: " << www.getWorldName() << std::endl;
+	std::cout << ">> A cor da atmosfera do mundo " << cc << " é: " << www.getWorldColor() << std::endl;
+	std::cout << ">> A quatidade de habitantes é: " << www.getWorldPopulation() << std::endl;
 }
