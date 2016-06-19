@@ -2,54 +2,9 @@
 #include <istream>
 #include <string>
 
+#include "world.hpp"
+
 using namespace std;
-
-class World{
-private:
-	std::string WorldName;
-	std::string WorldColor;
-	int WorldPopulation;
-public:
-	std::string getWorldName() const;
-	void setWorldName(std::string);
-	std::string getWorldColor() const;
-	void setWorldColor(string);
-	int getWorldPopulation() const;
-	void setWorldPopulation(int);
-};
-
-string World::getWorldName() const{
-	return WorldName;
-}
-
-void World::setWorldName(std::string n){
-	if (n.length() == 0)
-		WorldName = "Nome não definido";
-	else
-		WorldName = n;
-}
-
-string World::getWorldColor() const{
-	return WorldColor;
-}
-
-void World::setWorldColor(std::string c){
-	if (c.length() == 0)
-		WorldName = "Cor não definida";
-	else
-		WorldColor = c;
-}
-
-int World::getWorldPopulation() const{
-	return WorldPopulation;
-}
-
-void World::setWorldPopulation(int p){
-	if (p < 0)
-		WorldPopulation = 0;
-	else
-		WorldPopulation = p;
-}
 
 void setWorldProfile (World&, int cc);
 void showWorldProfile (const World&, int cc);
